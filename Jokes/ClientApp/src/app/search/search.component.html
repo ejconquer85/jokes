@@ -1,0 +1,29 @@
+<h1>Search Jokes</h1>
+
+<div class="input-group mb-12">
+  <input [(ngModel)]='searchTerm' class="form-control mb-9" id="search" [ngModelOptions]="{standalone: true}" (keydown)="onKeydown($event)"/>
+  <button class="btn btn-primary mb-3" (click)="search()">Search</button>
+</div>
+
+<div *ngIf="jokes">
+  <div *ngIf="jokes.short.length > 0">
+    <h4>Short Jokes</h4>
+    <ul *ngFor="let shortJoke of jokes.short">
+      <li [innerHTML] ="makeBold(shortJoke)"></li>
+    </ul>
+  </div>
+
+  <div *ngIf="jokes.medium.length > 0">
+    <h4>Medium Jokes</h4>
+    <ul *ngFor="let mediumJoke of jokes.medium">
+      <li [innerHTML]="makeBold(mediumJoke)"></li>
+    </ul>
+  </div>
+
+  <div *ngIf="jokes.long.length > 0">
+    <h4>Long Jokes</h4>
+    <ul *ngFor="let longJoke of jokes.long">
+      <li [innerHTML]="makeBold(longJoke)"></li>
+    </ul>
+  </div>
+</div>
