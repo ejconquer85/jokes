@@ -1,14 +1,13 @@
-import { Component, Inject } from '@angular/core';
+import {Component, Inject, OnDestroy} from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Http } from '../../../node_modules/@angular/http';
 
 @Component({
     selector: 'app-random-component',
     templateUrl: './random.component.html'
 })
-export class RandomComponent {
-    public currentCount = 0;
+export class RandomComponent implements OnDestroy {
+
     public subscription: Subscription;
     public myHttp: HttpClient;
     public baseUrl: string;
@@ -19,7 +18,7 @@ export class RandomComponent {
         this.baseUrl = baseUrl;
         this.getRandomJoke();
         const source = interval(10000);
-        this.subscription = source.subscribe(val => this.getRandomJoke());
+        this.subscription = source.subscribe(() => this.getRandomJoke());
     }
 
     public getRandomJoke(){
