@@ -6,25 +6,32 @@
   <button class="btn btn-primary mb-3" (click)="search()">Search</button>
 </div>
 
+<div *ngIf="searching" class="row text-center">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+
 <div *ngIf="jokes">
   <div *ngIf="jokes.short.length > 0">
     <h4>Short Jokes</h4>
-    <ul *ngFor="let shortJoke of jokes.short">
-      <li [innerHTML] ="makeBold(shortJoke)"></li>
+    <ul class="list-group" *ngFor="let shortJoke of jokes.short">
+      <li  class="list-group-item" [innerHTML] ="makeBold(shortJoke)"></li>
     </ul>
   </div>
-
+  <br>
   <div *ngIf="jokes.medium.length > 0">
     <h4>Medium Jokes</h4>
-    <ul *ngFor="let mediumJoke of jokes.medium">
-      <li [innerHTML]="makeBold(mediumJoke)"></li>
+    <ul class="list-group" *ngFor="let mediumJoke of jokes.medium">
+      <li class="list-group-item" [innerHTML]="makeBold(mediumJoke)"></li>
     </ul>
   </div>
-
+  <br>
   <div *ngIf="jokes.long.length > 0">
     <h4>Long Jokes</h4>
-    <ul *ngFor="let longJoke of jokes.long">
-      <li [innerHTML]="makeBold(longJoke)"></li>
+    <ul class="list-group" *ngFor="let longJoke of jokes.long">
+      <li class="list-group-item" [innerHTML]="makeBold(longJoke)"></li>
     </ul>
   </div>
 </div>
