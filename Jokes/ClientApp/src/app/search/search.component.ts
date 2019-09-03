@@ -1,38 +1,37 @@
-import { Component, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Component} from '@angular/core';
+import {DataService} from "../data.service";
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html'
 })
 export class SearchComponent {
-    public jokes: Jokes;
-    public searchTerm: string;
-    public myHttp: HttpClient;
-    public baseUrl: string;
+  jokes: Jokes;
+  searchTerm:string = '';
+  searching: boolean = false;
 
-
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-      this.myHttp = http;
-      this.baseUrl = baseUrl;
-      this.searchTerm = '';
+  constructor(
+    public _dataService: DataService
+  ) {
   }
 
   public search() {
-    this.myHttp.get<Jokes>(this.baseUrl + 'api/jokes/' + this.searchTerm).subscribe(result => {
+    this.searching = true;
+    this._dataService.requestJoke(this.searchTerm).subscribe(result => {
+      this.searching = false;
       this.jokes = result;
-    }, error => console.error(error));
+    });
   }
 
-    public makeBold(joke: string) {
-      return joke.replace(this.searchTerm, '<b><i>'+this.searchTerm+'</i></b>');
-    }
+  public makeBold(joke: string) {
+    return joke.replace(this.searchTerm, '<b><i>' + this.searchTerm + '</i></b>');
+  }
 
   public onKeydown(event) {
-  if (event.key === "Enter") {
+    if (event.key === "Enter") {
       this.search();
+    }
   }
-}
 }
 
 interface Jokes {

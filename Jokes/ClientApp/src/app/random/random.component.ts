@@ -1,34 +1,41 @@
-import {Component, Inject, OnDestroy} from '@angular/core';
-import { interval, Subscription } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {interval, Subscription} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {DataService} from "../data.service";
 
 @Component({
-    selector: 'app-random-component',
-    templateUrl: './random.component.html'
+  selector: 'app-random-component',
+  templateUrl: './random.component.html'
 })
-export class RandomComponent implements OnDestroy {
+export class RandomComponent implements OnDestroy, OnInit {
 
-    public subscription: Subscription;
-    public myHttp: HttpClient;
-    public baseUrl: string;
-    public joke: Joke;
+  subscription: Subscription;
+  joke: Joke;
+  searching: boolean = false;
 
-    constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-        this.myHttp = http;
-        this.baseUrl = baseUrl;
-        this.getRandomJoke();
-        const source = interval(10000);
-        this.subscription = source.subscribe(() => this.getRandomJoke());
-    }
+  constructor(
+    public _dataService: DataService
+  ) {
 
-    public getRandomJoke(){
-         this.myHttp.get<Joke>(this.baseUrl + 'api/jokes/').subscribe(result => {
+    const source = interval(10000);
+    this.subscription = source.subscribe(() => this.getRandomJoke());
+  }
+
+  ngOnInit(): void {
+    this.getRandomJoke();
+  }
+
+  public getRandomJoke() {
+    this.searching = true;
+    this._dataService.requestJoke('').subscribe(result => {
+      this.searching = false;
       this.joke = result;
-      }, error => console.error(error));
-    }
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
-    }
+    });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }
 
 interface Joke {

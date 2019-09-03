@@ -1,9 +1,10 @@
-<h1>Jokes!</h1>
-<p>Welcome to your Jokes Page</p>
-
-<p>There are two Jokes Modes:</p>
-<ul>
-    <li><strong>Random Jokes: </strong>You get a random Joke every 10 seconds.</li>
-    <li><strong>Search Jokes:</strong>You can search for a term and get the first 30 Jokes containing that term.</li>
-</ul>
-
+<div class="jumbotron">
+  <h1 class="display-4">Jokes!</h1>
+  <p class="lead">Welcome to your Jokes Page!</p>
+  <hr class="my-4">
+  <p>There are two Jokes Modes:</p>
+  <ul>
+    <li><a class="text-dark" [routerLink]='["/random"]'>Random Joke:</a> You get a random Joke every 10 seconds.</li>
+    <li><a class="text-dark" [routerLink]='["/search"]'>Search Jokes:</a> You can search for a term and get the first 30 Jokes containing that term.</li>
+  </ul>
+</div>
