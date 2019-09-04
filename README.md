@@ -13,9 +13,9 @@ It's build using .NetCore 2.2.3 and Angular 8.3.2
 Angular 8.3.2
 ```
 
-### How to run it:
+### How to run it on Mac:
 ```
-1. Donwload the repository
+1. Download the repository
 2. cd Jokes
 3. dotnet restore
 4. dotnet run
