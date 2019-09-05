@@ -15,10 +15,10 @@ Angular 8.3.2
 
 ### How to run it on Mac:
 ```
-1. Download the repository
-2. cd Jokes
+1. Donwload the repository
+2. cd jokes
 3. dotnet restore
-4. dotnet run
+4. dotnet run --project Jokes
 5. Open https://localhost:5001/
 ```
 
