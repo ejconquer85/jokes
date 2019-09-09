@@ -13,7 +13,7 @@ It's build using .NetCore 2.2.3 and Angular 8.3.2
 Angular 8.3.2
 ```
 
-### How to run it on Mac:
+### How to run it:
 ```
 1. Donwload the repository
 2. cd jokes
